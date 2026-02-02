@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
     <title>Login</title>
 </head>
 <body>
-    <h1>login</h1>
-    <p>sign in to login</p>
-    <a href="index.html">index page</a>
-    <a href="https://www.youtube.com/">youtube</a>
-    <p>new line</p>
+    <div id="loginhead">
+        <h2>Login to RSMS</h2>
+    </div>
+    <div id="loginpage">
+        <form action="/login.py" method="GET">    
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+    </div>
 </body>
 </html>
