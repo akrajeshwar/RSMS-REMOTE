@@ -1,15 +1,21 @@
-console.log("hello")
+document.addEventListener("DOMContentLoaded", function () {
 
-const emailInput = document.getElementById("username")
-const passwordInput = document.getElementById("password")
-const form = document.getElementById("loginpage")
+    console.log("hello");
 
-form.addEventListener("submit", function (event) {
-    event.preventDefault(); //prevent page from reloading
+    // const body = 
 
-    const email = emailInput.value;
-    const password = passwordInput.value;
+    const emailInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const form = document.getElementById("loginpage");
 
-    console.log("email:", email);
-    console.log("password:", password);
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // prevent page from reloading
+
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        console.log("email:", email);
+        console.log("password:", password);
+    });
+
 });
