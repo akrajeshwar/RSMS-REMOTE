@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "email": "testuser@gmail.com",
+    "password": "Testuser@1",
+    "phone": "4578123568",
+    "createdAt": "2026-03-12T19:04:40.530Z"
+  },
+  {
+    "id": 2,
+    "email": "testuser2@gmail.com",
+    "password": "Testuser@1",
+    "phone": "7848961234",
+    "createdAt": "2026-03-12T19:09:34.051Z"
+  }
+]
