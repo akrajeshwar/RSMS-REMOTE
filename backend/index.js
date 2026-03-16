@@ -31,7 +31,7 @@ app.post("/signup", (req, res) => {
     let users = [];
     if (fs.existsSync(usersFile)) {
       const data = fs.readFileSync(usersFile, 'utf-8');
-      users = JSON.parse(data);
+      users = JSON.parse(data);   //data we recieved was in form of stringfy so we parsed it to handle, while sending it convert it to stringyfy
     }
 
     // Check if user already exists
@@ -81,17 +81,43 @@ app.post("/login", (req, res) => {
     });
   }
 
-  // fake authentication (for now)
-  if (email === "vibhorkapoor123@gmail.com" && password === "vib@123") {
+  try {
+    // Read users from user.json
+    let users = [];
+    if (fs.existsSync(usersFile)) {
+      const data = fs.readFileSync(usersFile, 'utf-8');
+      users = JSON.parse(data);
+    }
+
+    // Find user by email
+    const user = users.find(u => u.email === email);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    // Check password
+    if (user.password !== password) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    // Authentication successful
     return res.json({
       success: true,
       message: "Login successful",
     });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error during login. Please try again later.",
+    });
   }
-
-  return res.status(401).json({
-    message: "Invalid credentials",
-  });
 });
 
 app.listen(PORT, () => {

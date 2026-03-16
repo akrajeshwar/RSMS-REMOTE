@@ -38,12 +38,12 @@ signupForm.addEventListener('submit', async function(e) {
             // User created successfully
             alert('Signup successful! Redirecting to login...');
             console.log('Redirecting to login page...');
-            window.location.href = '../login.html';
+            window.location.href = 'http://127.0.0.1:5500/frontend/login.html';
         } else if (data.exists) {
             // User already exists
             alert('User already exists! Redirecting to login...');
             console.log('Redirecting to login page...');
-            window.location.href = '../login.html';
+            window.location.href = 'http://127.0.0.1:5500/frontend/login.html';
         } else {
             // Error creating user
             alert(data.message || 'Error during signup. Please try again.');
