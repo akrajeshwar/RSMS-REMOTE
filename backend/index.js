@@ -2,14 +2,40 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const jwt = require("jsonwebtoken");
 
 const app = express();
+
+const secret_Key ="SecuredKey123";
 
 const PORT = 3000;
 const usersFile = path.join(__dirname, 'user.json');
 
 app.use(express.json());
 app.use(cors());
+
+// JWT verification middleware
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: "No token provided",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, secret_Key);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or expired token",
+    });
+  }
+};
 
 app.get("/", (req, res) => {
   res.send("Backend is running");
@@ -107,9 +133,16 @@ app.post("/login", (req, res) => {
     }
 
     // Authentication successful
+    const token = jwt.sign(
+      { email: user.email, id: user.id },
+      secret_Key,
+      { expiresIn: "1h" }
+    );
+
     return res.json({
       success: true,
       message: "Login successful",
+      token: token,
     });
   } catch (error) {
     console.error("Error during login:", error);

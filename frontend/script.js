@@ -118,7 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  form.addEventListener("submit", async (e) => {
+  if (form) {
+    form.addEventListener("submit", async (e) => {
     e.preventDefault(); // stop page reload
 
     const email = document.getElementById("email").value;
@@ -139,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Save login state
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
+        localStorage.setItem("token", data.token);
         alert("Login successful");
 
         window.location.href = "dashboard.html";
@@ -151,4 +153,5 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error(error);
     }
   });
+  }
 });
